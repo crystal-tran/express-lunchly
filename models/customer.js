@@ -120,9 +120,7 @@ class Customer {
     const bestCustomers = await db.query(
       `SELECT c.id,
               c.first_name AS "firstName",
-              c.last_name AS "lastName",
-              c.phone,
-              c.notes
+              c.last_name AS "lastName"
       FROM customers AS c
         LEFT JOIN reservations AS r
           ON c.id = r.customer_id
