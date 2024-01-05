@@ -115,11 +115,12 @@ class Customer {
   }
 
   /** return top 10 customers */
-  async getBestCustomers(){
+
+  static async getBestCustomers(){
     const bestCustomers = await db.query(
       `SELECT c.id,
-              c.first_name,
-              c.last_name,
+              c.first_name AS "firstName",
+              c.last_name AS "lastName",
               c.phone,
               c.notes
       FROM customers AS c
