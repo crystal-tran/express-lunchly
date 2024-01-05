@@ -91,10 +91,28 @@ class Customer {
     }
   }
 
-  /**Returns customer's full name. */
+  /** Returns customer's full name. */
+
   getFullName(){
     return `${this.firstName} ${this.lastName}`;
   }
+
+  /** Search method for searching first or last name. */
+
+  static async search(term){
+    const results = await db.query(
+      `SELECT id,
+              first_name AS "firstName",
+              last_name AS "lastName",
+              phone,
+              notes
+        FROM customers
+        WHERE first_name ILIKE $1 OR last_name ILIKE $1`,
+        [`%${term}%`],
+    );
+    return results.rows.map(c => new Customer(c));
+  }
+
 }
 
 module.exports = Customer;
