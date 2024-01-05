@@ -114,6 +114,24 @@ class Customer {
     return results.rows.map(c => new Customer(c));
   }
 
+  /** return top 10 customers */
+  async getBestCustomers(){
+    const bestCustomers = await db.query(
+      `SELECT c.id,
+              c.first_name,
+              c.last_name,
+              c.phone,
+              c.notes
+      FROM customers AS c
+        LEFT JOIN reservations AS r
+          ON c.id = r.customer_id
+      GROUP BY c.id
+      ORDER BY COUNT(c.id) DESC, last_name, first_name
+      LIMIT 10`
+    );
+    return bestCustomers.rows.map(c => new Customer(c));
+  }
+
 }
 
 module.exports = Customer;
