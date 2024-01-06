@@ -114,7 +114,7 @@ class Customer {
     return results.rows.map(c => new Customer(c));
   }
 
-  /** return top 10 customers */
+  /** Returns top 10 customers with most reservations. */
 
   static async getBestCustomers(){
     const bestCustomers = await db.query(
@@ -130,7 +130,6 @@ class Customer {
     );
     return bestCustomers.rows.map(c => new Customer(c));
   }
-
 }
 
 module.exports = Customer;
