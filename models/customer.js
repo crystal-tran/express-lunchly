@@ -92,10 +92,16 @@ class Customer {
   }
 
   /** Returns customer's full name. */
-
-  getFullName(){
-    return `${this.firstName} ${this.lastName}`;
+// FIXME: bug here, where we are recursively looping. Get an Error 500 where
+//maximum call stack size exceeded
+  get fullName(){
+    const fullName = `${this.firstName} ${this.lastName}`;
+    return this.fullName;
   }
+
+  // set fullName(){
+  //   this._fullName = `${this.firstName} ${this.lastName}`;
+  // }
 
   /** Search method for searching first or last name. */
 
