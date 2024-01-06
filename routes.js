@@ -29,7 +29,7 @@ router.get("/", async function (req, res, next) {
 /** Show list of top-ten customers. */
 
 router.get("/top-ten/", async function(req, res, next){
-  const customers = await Customer.getBestCustomers();
+  const customers = await Customer.getTopTenCustomers();
 
   return res.render("customer_list.html", { customers });
 });

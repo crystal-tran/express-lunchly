@@ -107,7 +107,7 @@ class Customer {
               phone,
               notes
         FROM customers
-        WHERE first_name ILIKE $1 OR last_name ILIKE $1 //TODO: concat sequel method
+        WHERE first_name || ' ' || last_name ILIKE $1
         ORDER BY last_name, first_name`,
         [`%${term}%`],
     );
@@ -116,7 +116,7 @@ class Customer {
 
   /** Returns top 10 customers with most reservations. */
 
-  static async getBestCustomers(){ //FIXME: topTen can be clearer
+  static async getTopTenCustomers(){
     const bestCustomers = await db.query(
       `SELECT c.id,
               c.first_name AS "firstName",
